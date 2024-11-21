@@ -1,0 +1,677 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for contracts/NftMarketplace.sol</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../prettify.css" />
+    <link rel="stylesheet" href="../base.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style type='text/css'>
+        .coverage-summary .sorter {
+            background-image: url(../sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+<body>
+<div class='wrapper'>
+  <div class='pad1'>
+    <h1>
+      <a href="../index.html">all files</a> / <a href="index.html">contracts/</a> NftMarketplace.sol
+    </h1>
+    <div class='clearfix'>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">100% </span>
+        <span class="quiet">Statements</span>
+        <span class='fraction'>22/22</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">94.44% </span>
+        <span class="quiet">Branches</span>
+        <span class='fraction'>34/36</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">100% </span>
+        <span class="quiet">Functions</span>
+        <span class='fraction'>11/11</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">97.5% </span>
+        <span class="quiet">Lines</span>
+        <span class='fraction'>39/40</span>
+      </div>
+    </div>
+  </div>
+  <div class='status-line high'></div>
+<pre><table class="coverage">
+<tr><td class="line-count quiet">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150
+151
+152
+153
+154
+155
+156
+157
+158
+159
+160
+161
+162
+163
+164
+165
+166
+167
+168
+169
+170
+171
+172
+173
+174
+175
+176
+177
+178
+179
+180
+181
+182
+183
+184
+185
+186
+187
+188
+189
+190
+191
+192
+193
+194
+195
+196
+197
+198
+199
+200
+201
+202
+203
+204
+205</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">13×</span>
+<span class="cline-any cline-yes">13×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">12×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">11×</span>
+<span class="cline-any cline-yes">11×</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">8×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">16×</span>
+<span class="cline-any cline-yes">16×</span>
+<span class="cline-any cline-yes">16×</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">13×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">17×</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">15×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">11×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">10×</span>
+<span class="cline-any cline-yes">10×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">4×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.27;
+&nbsp;
+import '@openzeppelin/contracts/token/ERC721/IERC721.sol';
+import '@openzeppelin/contracts/utils/ReentrancyGuard.sol';
+&nbsp;
+error NftMarketplace__PriceMustBeAboveZero();
+error NftMarketplace__NotApprovedForMarketplace();
+error NftMarketplace__AlreadyListed(address nftAddress, uint256 tokenId);
+error NftMarketplace__NotOwner();
+error NftMarketplace__NotListed(address nftAddress, uint256 tokenId);
+error NftMarketplace__PriceNotMet(address nftAddress, uint256 tokenId, uint256 price);
+error NftMarketplace__NoProceeds();
+error NftMarketplace__TransferFailed();
+&nbsp;
+contract NftMarketplace is ReentrancyGuard {
+  // NFT contract address -&gt; tokenId -&gt; listing
+  struct Listing {
+    address seller;
+    uint256 price;
+  }
+  mapping(address =&gt; mapping(uint256 =&gt; Listing)) private s_listings;
+  // 卖家的地址 -&gt; 卖家的收益
+  mapping(address =&gt; uint256) private s_proceeds;
+&nbsp;
+  event ItemListed(
+    address indexed seller,
+    address indexed nftAddress,
+    uint256 indexed tokenId,
+    uint256 price
+  );
+  event ItemBought(
+    address indexed buyer,
+    address indexed nftAddress,
+    uint256 indexed tokenId,
+    uint256 price
+  );
+  event ItemCanceled(address indexed seller, address indexed nftAddress, uint256 indexed tokenId);
+  event ItemUpdated(
+    address indexed seller,
+    address indexed nftAddress,
+    uint256 indexed tokenId,
+    uint256 price
+  );
+&nbsp;
+  // 检验是否在出售列表. 如果NFT已经在出售列表中了, 则不能再次上架
+  modifier notListed(
+    address nftAddress,
+    uint256 tokenId,
+    address owner
+  ) {
+    Listing memory listing = s_listings[nftAddress][tokenId];
+    if (listing.price &gt; 0) {
+      revert NftMarketplace__AlreadyListed(nftAddress, tokenId);
+    }
+    _;
+  }
+  // 检查是否是一个list
+  modifier isListed(address nftAddress, uint256 tokenId) {
+    Listing memory listing = s_listings[nftAddress][tokenId];
+    if (listing.price &lt;= 0) {
+      revert NftMarketplace__NotListed(nftAddress, tokenId);
+    }
+    _;
+  }
+  modifier isOwner(
+    address nftAddress,
+    uint256 tokenId,
+    address spender
+  ) {
+    IERC721 nft = IERC721(nftAddress);
+    address owner = nft.ownerOf(tokenId);
+    if (spender != owner) {
+      revert NftMarketplace__NotOwner();
+    }
+    _;
+  }
+  modifier priceMustBeAboveZero(uint256 price) {
+    if (price &lt;= 0) {
+      revert NftMarketplace__PriceMustBeAboveZero();
+    }
+    _;
+  }
+&nbsp;
+  /**
+   * @dev 上架NFT
+   * @param nftAddress NFT地址
+   * @param tokenId NFT的tokenId
+   * @param price 价格
+   */
+  function listItem(
+    address nftAddress,
+    uint256 tokenId,
+    uint256 price // todo: 后续使用data feel实现, 使用稳定币
+  )
+    external
+    priceMustBeAboveZero(price)
+    notListed(nftAddress, tokenId, msg.sender)
+    isOwner(nftAddress, tokenId, msg.sender)
+  {
+    // 1. 获取NFT.调用者把NFT转给合约;
+    // 2. 把NFT的权限转给合约, 这样合约可以代表调用者出售NFT;
+    if (IERC721(nftAddress).getApproved(tokenId) != address(this)) {
+      revert NftMarketplace__NotApprovedForMarketplace();
+    }
+    s_listings[nftAddress][tokenId] = Listing(msg.sender, price);
+    emit ItemListed(msg.sender, nftAddress, tokenId, price);
+  }
+&nbsp;
+  /**
+   * @dev nonReentrant 防止重入攻击. 所有的payable函数都应该先清空数据后再转账.
+   * 1. 检查NFT是否在出售列表中
+   * 2. 检查价格是否足够
+   * 3. 转账到卖家合约钱包
+   * 4. 删除出售记录
+   * 5. NFT转给买家
+   * @param nftAddress NFT地址
+   * @param tokenId NFT的tokenId
+   */
+  function buyItem(
+    address nftAddress,
+    uint256 tokenId
+  ) external payable <span class="missing-if-branch" title="else path not taken" >E</span>nonReentrant isListed(nftAddress, tokenId) {
+    Listing memory listedItem = s_listings[nftAddress][tokenId];
+    // 检查价格是否足够
+    if (msg.value &lt; listedItem.price) {
+      revert NftMarketplace__PriceNotMet(nftAddress, tokenId, listedItem.price);
+    }
+    // 转账到卖家合约钱包
+    s_proceeds[listedItem.seller] += msg.value;
+    // 删除出售记录
+    delete s_listings[nftAddress][tokenId];
+    // NFT转给买家
+    IERC721(nftAddress).safeTransferFrom(listedItem.seller, msg.sender, tokenId);
+    emit ItemBought(msg.sender, nftAddress, tokenId, listedItem.price);
+  }
+&nbsp;
+  /**
+   * @dev 取消出售
+   * @param nftAddress NFT地址
+   * @param tokenId NFT的tokenId
+   */
+  function cancelListing(
+    address nftAddress,
+    uint256 tokenId
+  ) external isListed(nftAddress, tokenId) isOwner(nftAddress, tokenId, msg.sender) {
+    delete s_listings[nftAddress][tokenId];
+    emit ItemCanceled(msg.sender, nftAddress, tokenId);
+  }
+&nbsp;
+  /**
+   * @dev 更新出售价格
+   * @param nftAddress NFT地址
+   * @param tokenId NFT的tokenId
+   * @param newPrice 新价格
+   */
+  function updateListing(
+    address nftAddress,
+    uint256 tokenId,
+    uint256 newPrice
+  )
+    external
+    isListed(nftAddress, tokenId)
+    priceMustBeAboveZero(newPrice)
+    isOwner(nftAddress, tokenId, msg.sender)
+  {
+    s_listings[nftAddress][tokenId].price = newPrice;
+    emit ItemListed(msg.sender, nftAddress, tokenId, newPrice);
+  }
+&nbsp;
+  /**
+   * @dev 提现收益
+   */
+  function withdrawProceeds() external {
+    uint256 proceeds = s_proceeds[msg.sender];
+    if (proceeds &lt;= 0) {
+      revert NftMarketplace__NoProceeds();
+    }
+    s_proceeds[msg.sender] = 0;
+    (bool success, ) = payable(msg.sender).call{value: proceeds}('');
+    <span class="missing-if-branch" title="if path not taken" >I</span>if (!success) {
+      revert NftMarketplace__TransferFailed();
+    }
+  }
+&nbsp;
+  /**
+   * @dev 获取出售记录
+   * @param nftAddress NFT地址
+   * @param tokenId NFT的tokenId
+   * @return 出售记录
+   */
+  function getListing(address nftAddress, uint256 tokenId) external view returns (Listing memory) {
+    return s_listings[nftAddress][tokenId];
+  }
+&nbsp;
+  /**
+   * @dev 获取卖家的收益
+   * @param seller 卖家的地址
+   * @return 卖家的收益
+   */
+  function getProceeds(address seller) external view returns (uint256) {
+    return s_proceeds[seller];
+  }
+}
+&nbsp;</pre></td></tr>
+</table></pre>
+<div class='push'></div><!-- for sticky footer -->
+</div><!-- /wrapper -->
+<div class='footer quiet pad2 space-top1 center small'>
+  Code coverage
+  generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Fri Nov 15 2024 13:30:47 GMT+0800 (中国标准时间)
+</div>
+</div>
+<script src="../prettify.js"></script>
+<script>
+window.onload = function () {
+        if (typeof prettyPrint === 'function') {
+            prettyPrint();
+        }
+};
+</script>
+<script src="../sorter.js"></script>
+</body>
+</html>
