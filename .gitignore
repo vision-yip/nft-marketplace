@@ -14,6 +14,7 @@ pnpm-lock.yaml
 package-lock.json
 
 # testing
+./back-end/artifacts
 ./back-end/coverage
 ./back-end/cache
 ./back-end/deployments
