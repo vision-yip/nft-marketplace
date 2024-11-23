@@ -1,17 +1,21 @@
-const { expect } = require('chai');
+import { ethers } from 'hardhat';
+import { NftMarketplace, BasicNft } from '../../typechain-types';
+import { deployments } from 'hardhat';
+import { expect} from 'chai';
+import { SignerWithAddress } from '@nomicfoundation/hardhat-ethers/signers';
 
 
 describe('NftMarketplace', () => {
   const PRICE = ethers.parseEther('1');
   const TOKEN_ID = 0;
-  let nftMarketplace;
-  let deployer;
-  let player;
-  let basicNft;
+  let nftMarketplace: NftMarketplace;
+  let deployer: SignerWithAddress;
+  let player: SignerWithAddress;
+  let basicNft: BasicNft;
   beforeEach(async () => {
     await deployments.fixture(['all']);
-    nftMarketplace = await ethers.getContract('NftMarketplace');
-    basicNft = await ethers.getContract('BasicNft');
+    nftMarketplace = await ethers.getContract<NftMarketplace>('NftMarketplace');
+    basicNft = await ethers.getContract<BasicNft>('BasicNft');
     const signers = await ethers.getSigners();
     deployer = signers[0];
     player = signers[1];

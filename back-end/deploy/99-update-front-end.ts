@@ -1,16 +1,16 @@
-const fs = require('fs');
-const { network } = require('hardhat');
+import fs from 'fs';
+import { ethers, network } from 'hardhat';
 const frontEndContractsFile = '../front-end/src/constants/networkMapping.json';
 const frontEndAbiLocation = '../front-end/src/constants/';
 
-module.exports = async () => {
+const deployUpdateFrontEnd = async () => {
   await updateContractAddresses();
   await updateAbi();
 };
 
-async function updateContractAddresses() {
+const updateContractAddresses = async () => {
   const nftMarketplace = await ethers.getContract('NftMarketplace');
-  const chainId = network.config.chainId.toString();
+  const chainId = network?.config?.chainId?.toString() || '';
   const contractAddresses = JSON.parse(fs.readFileSync(frontEndContractsFile, 'utf-8'));
   if (!(chainId in contractAddresses)) {
     contractAddresses[chainId] = {};
@@ -22,15 +22,15 @@ async function updateContractAddresses() {
   } else {
     contractAddresses[chainId]['NftMarketplace'] = [nftMarketplace.target];
   }
-  console.log(contractAddresses);
   fs.writeFileSync(frontEndContractsFile, JSON.stringify(contractAddresses));
 }
 
-async function updateAbi() {
+const updateAbi = async () => {
   const nftMarketplace = await ethers.getContract('NftMarketplace');
   fs.writeFileSync(`${frontEndAbiLocation}marketplaceAbi.json`, JSON.stringify(nftMarketplace.interface.fragments));
   const basicNft = await ethers.getContract('BasicNft');
   fs.writeFileSync(`${frontEndAbiLocation}basicNftAbi.json`, JSON.stringify(basicNft.interface.fragments));
 }
 
-module.exports.tags = ['all', 'frontend'];
+export default deployUpdateFrontEnd;
+deployUpdateFrontEnd.tags = ['all', 'frontend'];
