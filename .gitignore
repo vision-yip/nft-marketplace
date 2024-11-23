@@ -14,7 +14,9 @@ pnpm-lock.yaml
 package-lock.json
 
 # testing
-/coverage
+./back-end/coverage
+./back-end/cache
+./back-end/deployments
 
 # next.js
 /.next/
