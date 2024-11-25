@@ -2,14 +2,14 @@ import { useEffect, useState } from 'react';
 import { useReadContract, useAccount } from 'wagmi';
 import { basicNftAbi } from '@/constants';
 import { formatEther } from 'viem';
-import { type NftAttr } from './List';
 import Image from 'next/image';
 import { formatAddress, isOwner } from '@/tools/ulits';
 import UpdateModal from './UpdateModal';
 import { Skeleton } from 'tdesign-react';
 import BuyModal from './BuyModal';
+import { type NftAttribute } from '@/interface/nft';
 
-const Card = ({ item }: { item: NftAttr }) => {
+const Card = ({ item }: { item: NftAttribute }) => {
   const [imageUrl, setImageUrl] = useState<string>('');
   const [tokenName, setTokenName] = useState<string>('');
   const [tokenDesc, setTokenDesc] = useState<string>('');

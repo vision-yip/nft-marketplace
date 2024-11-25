@@ -4,7 +4,7 @@ import { formatEther } from 'viem';
 import { useWriteContract } from 'wagmi';
 import { useNftMarketplaceAddress } from '@/tools/hooks';
 import { marketplaceAbi } from '@/constants';
-import { NftAttr } from './List';
+import { type NftAttribute } from '@/interface/nft';
 
 const BuyModal = ({
   open,
@@ -14,7 +14,7 @@ const BuyModal = ({
 }: {
   open: boolean;
   onClose: () => void;
-  item: NftAttr;
+  item: NftAttribute;
   tokenName: string;
 }) => {
   const { nftAddress, tokenId, price } = item;

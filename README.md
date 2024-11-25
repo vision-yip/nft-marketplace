@@ -5,6 +5,7 @@
 - typescript
 - nextjs
 - tdesign
+- tailwindcss
 - wagmi
 - viem
 - graphql-request

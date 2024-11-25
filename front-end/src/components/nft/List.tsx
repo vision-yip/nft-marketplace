@@ -1,44 +1,11 @@
 import { useEffect, useState } from 'react';
-import { Address } from 'viem';
-import { requestUrl } from '@/constants';
-import { useQuery, UseQueryResult } from '@tanstack/react-query';
-import { gql, request } from 'graphql-request';
 import Card from './Card';
-
-const query = gql`
-  {
-    activeItems(first: 5) {
-      id
-      buyer
-      nftAddress
-      tokenId
-      seller
-      price
-    }
-  }
-`;
-
-export interface NftAttr {
-  id: Address;
-  buyer: Address;
-  nftAddress: Address;
-  tokenId: string;
-  seller: Address;
-  price: bigint;
-}
-
-interface NftListType {
-  activeItems: NftAttr[];
-}
+import { type NftAttribute } from '@/interface/nft';
+import { useGetNftList } from '@/request/nft';
 
 const NftList = () => {
-  const [nftList, setNftList] = useState<NftAttr[]>([]);
-  const { data: nftListRequest, isPending }: UseQueryResult<NftListType> = useQuery({
-    queryKey: ['data'],
-    queryFn: async () => {
-      return await request(requestUrl, query);
-    },
-  });
+  const [nftList, setNftList] = useState<NftAttribute[]>([]);
+  const { data: nftListRequest, isPending } = useGetNftList();
   useEffect(() => {
     if (nftListRequest) {
       setNftList(nftListRequest?.activeItems);
