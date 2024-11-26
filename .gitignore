@@ -20,8 +20,8 @@ package-lock.json
 /*/deployments/
 
 # next.js
-/*/.next/
-/*/out/
+/front-end/.next/
+/front-end/out/
 
 # production
 /build
