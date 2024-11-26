@@ -1,5 +1,5 @@
-import { useState } from 'react';
-import { useChainId, useWriteContract } from 'wagmi';
+import { useEffect, useState } from 'react';
+import { useChainId, useWaitForTransactionReceipt, useWriteContract } from 'wagmi';
 import { parseEther, type Address } from 'viem';
 import { NotificationPlugin, Dialog, Input } from 'tdesign-react';
 
@@ -21,7 +21,21 @@ const UpdateModal = ({
   const chainIdStr = chainId.toString();
   const nftMarketplaceAddress =
     networkMapping[chainIdStr as keyof typeof networkMapping]?.NftMarketplace[0];
-  const { writeContractAsync, data } = useWriteContract();
+  const { writeContractAsync, data: updateNftHash } = useWriteContract();
+  const { isSuccess: isUpdateNftSuccess } = useWaitForTransactionReceipt({
+    hash: updateNftHash,
+  });
+
+  useEffect(() => {
+    if (isUpdateNftSuccess) {
+      NotificationPlugin.success({
+        title: 'Success',
+        content: 'NFT price updated successfully',
+      });
+      setConfirmLoading(false);
+      onClose();
+    }
+  }, [isUpdateNftSuccess]);
 
   const handleUpdate = async () => {
     try {
@@ -41,19 +55,12 @@ const UpdateModal = ({
         functionName: 'updateListing',
         args,
       });
-
-      NotificationPlugin.success({
-        title: 'Success',
-        content: 'NFT price updated successfully',
-      });
-      onClose();
     } catch (error) {
       console.error(error);
       NotificationPlugin.error({
         title: 'Error',
         content: 'Failed to update NFT price',
       });
-    } finally {
       setConfirmLoading(false);
     }
   };

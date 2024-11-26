@@ -2,10 +2,18 @@ import { useEffect, useState } from 'react';
 import Card from './Card';
 import { type NftAttribute } from '@/interface/nft';
 import { useGetNftList } from '@/request/nft';
+import { useWatchMarketplaceContract } from '@/tools/hooks';
 
 const NftList = () => {
   const [nftList, setNftList] = useState<NftAttribute[]>([]);
-  const { data: nftListRequest, isPending } = useGetNftList();
+  const { data: nftListRequest, isPending, refetch } = useGetNftList();
+
+  const watchItemListedCallback = async (logs: any) => {
+    console.log(logs);
+    await refetch();
+  };
+  useWatchMarketplaceContract(watchItemListedCallback);
+
   useEffect(() => {
     if (nftListRequest) {
       setNftList(nftListRequest?.activeItems);

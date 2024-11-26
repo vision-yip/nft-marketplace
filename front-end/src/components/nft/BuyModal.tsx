@@ -1,7 +1,7 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Dialog, NotificationPlugin } from 'tdesign-react';
 import { formatEther } from 'viem';
-import { useWriteContract } from 'wagmi';
+import { useWaitForTransactionReceipt, useWriteContract } from 'wagmi';
 import { useNftMarketplaceAddress } from '@/tools/hooks';
 import { marketplaceAbi } from '@/constants';
 import { type NftAttribute } from '@/interface/nft';
@@ -19,8 +19,23 @@ const BuyModal = ({
 }) => {
   const { nftAddress, tokenId, price } = item;
   const [confirmLoading, setConfirmLoading] = useState<boolean>(false);
-  const { writeContractAsync: __buyNft } = useWriteContract();
+  const { writeContractAsync: __buyNft, data: buyNftHash } = useWriteContract();
   const nftMarketplaceAddress = useNftMarketplaceAddress();
+  const { isSuccess: isBuyNftSuccess } = useWaitForTransactionReceipt({
+    hash: buyNftHash,
+  });
+
+  useEffect(() => {
+    if (isBuyNftSuccess) {
+      NotificationPlugin.success({
+        title: 'Success',
+        content: 'NFT purchased successfully',
+      });
+      setConfirmLoading(false);
+      onClose();
+    }
+  }, [isBuyNftSuccess]);
+
   const handleBuy = async () => {
     setConfirmLoading(true);
     try {
@@ -31,18 +46,12 @@ const BuyModal = ({
         args: [nftAddress, tokenId],
         value: price,
       });
-      NotificationPlugin.success({
-        title: 'Success',
-        content: 'NFT purchased successfully',
-      });
-      onClose();
     } catch (error) {
       console.error(error);
       NotificationPlugin.error({
         title: 'Error',
         content: 'Failed to purchase NFT',
       });
-    } finally {
       setConfirmLoading(false);
     }
   };
