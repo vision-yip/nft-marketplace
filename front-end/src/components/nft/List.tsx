@@ -8,9 +8,8 @@ const NftList = () => {
   const [nftList, setNftList] = useState<NftAttribute[]>([]);
   const { data: nftListRequest, isPending, refetch } = useGetNftList();
 
-  const watchItemListedCallback = async (logs: any) => {
-    console.log(logs);
-    await refetch();
+  const watchItemListedCallback = () => {
+    refetch();
   };
   useWatchMarketplaceContract(watchItemListedCallback);
 

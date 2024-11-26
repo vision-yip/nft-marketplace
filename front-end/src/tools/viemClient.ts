@@ -3,7 +3,7 @@ import { sepolia } from 'viem/chains'
 
 export const client = createPublicClient({
   chain: sepolia,
-  transport: webSocket('wss://eth-sepolia.g.alchemy.com/v2/6ExkU4ulEIw5izW-lKMjA3YfcluS9qyk'),
+  transport: webSocket(process.env.NEXT_PUBLIC_ALCHEMY_WS_URL),
 })
 
 

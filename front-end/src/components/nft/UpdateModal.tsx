@@ -13,7 +13,7 @@ const UpdateModal = ({
   open: boolean;
   onClose: () => void;
   nftAddress: Address;
-  tokenId: String;
+  tokenId: string;
 }) => {
   const [newPrice, setNewPrice] = useState<string>('0');
   const [confirmLoading, setConfirmLoading] = useState(false);
